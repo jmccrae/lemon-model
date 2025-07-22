@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+	<meta http-equiv="content-language" content="en">
+        <title>Lemon - Lexicon Model for Ontologies</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Bootstrap -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="/css/main.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="local.css" media="screen">
+        <script type="text/javascript" src="/js/vendor/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+
+        <style>
+            body {
+                padding-top: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">                
+                <div class="navbar-header">
+                    <a class="brand" href="/"><img src="/img/logo_small.png" height="50px"/></a>
+                </div>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="inactive home"><a href="/index.html">Home</a></li>
+                        <li class="inactive learn"><a href="/learn/learn.html">Learn</a></li>
+                        <li class="inactive download"><a href="/download/download.html">Download</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subnav">
+                <div class="container learn">
+                    <ul class="nav learn">                    
+                        <li><a href="/learn/5mins.html">Getting Started</a></li>
+                        <li><a href="/learn/cookbook.html">Cookbook</a></li>
+                    </ul>
+                </div>
+                <div class="container download">
+                    <ul class="nav download">
+                        <li><a href="/download/download.html">Model files</a></li>
+                        <li><a href="/download/api.html">API</a></li>
+                        <li><a href="/download/lemon2gf.html">lemon2gf</a></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+    <div class="container">
+<h1 id="lemon2gf">lemon2gf</h1>
+<p><a href="https://github.com/cunger/lemon2gf">lemon2gf</a> is a Python
+script that transforms an ontology and one or more attached lemon lexica
+into a <a href="http://www.grammaticalframework.org">Grammatical
+Framework</a> (GF) grammar.</p>
+<p>lemon2gf can be downloaded from <a
+href="https://github.com/cunger/lemon2gf">GitHub</a>.</p>
+<h2 id="architecture">Architecture</h2>
+<p>lemon2gf consists of two steps: mapping the ontology to an abstract
+syntax, and mapping a corresponding lexicon to a concrete syntax.</p>
+<figure>
+<img src="/img/architecture.png" alt="lemon2gf architecture" />
+<figcaption aria-hidden="true">lemon2gf architecture</figcaption>
+</figure>
+<h3 id="core-grammar">Core grammar</h3>
+<p>The generated GF grammar builds on a core that specifies the
+following categories:</p>
+<pre><code>cat 
+   Class;
+   Individual Class;
+   Statement;</code></pre>
+<p>In addition, it comprises domain-independent expressions and
+constructions, such as determiners, coordination and negation, that will
+not be provided in a domain lexicon.</p>
+<h3 id="mapping-an-ontology-to-an-abstract-syntax">Mapping an ontology
+to an abstract syntax</h3>
+<ul>
+<li><p>Classes are mapped to constants of category <code>Class</code>,
+e.g. the class <code>dbpedia:Mountain</code> becomes:</p>
+<p><code>Mountain : Class;</code></p></li>
+<li><p>Individuals are mapped to constants with their RDF type as type
+parameter, e.g. <code>resource:Nanga_Parbat</code> becomes:</p>
+<p><code>Nanga_Parbat : Individual Mountain;</code></p></li>
+<li><p>Object properties are mapped to functions from individuals of the
+domain type to individuals of the range type and have the return type
+<code>Statement</code>, e.g. <code>dbpedia:firstAscentPerson</code> with
+domain <code>dbpedia:Mountain</code> and range
+<code>dbpedia:Person</code> becomes:</p>
+<p><code>firstAscentPerson : Individual Mountain -&gt; Individual Person -&gt; Statement;</code></p>
+<p>If a property does not specify a domain or range,
+<code>owl:Thing</code> is assumed as default.</p></li>
+<li><p>Datatypes are mapped to categories (keeping the prefix),
+e.g. <code>xsd:double</code> becomes:</p>
+<p><code>cat xsddouble;</code></p></li>
+<li><p>Datatype properties are mapped to functions from individuals of
+the domain type to the range category, again with return type
+<code>Statement</code>, e.g. <code>dbpedia:elevation</code> with domain
+<code>dbpedia:Place</code> and range <code>xsd:double</code>
+becomes:</p>
+<p><code>elevation : Individual Place -&gt; xsddouble -&gt; Statement;</code></p></li>
+</ul>
+<p>Additionally, for each class a list of all superclasses are collected
+and mapped to according GF judgements that allow for simple type
+coercions, e.g. coercing <code>Individual Mountain</code> to
+<code>Individual Place</code>.</p>
+<h3 id="mapping-a-lexicon-to-a-concrete-syntax">Mapping a lexicon to a
+concrete syntax</h3>
+<p>First, all senses are collected. In case a sense does not refer to an
+ontology URI, for example either refers to a URI defined in the lexicon
+itself, or is composed of several subsenses, then the abstract syntax is
+extended with according GF functions or constants. Currently, lemon2gf
+covers the basic OWL constructs such as <code>owl:unionOf</code>,
+<code>owl:intersectionOf</code>, <code>owl:complementOf</code>,
+<code>owl:propertyChainAxiom</code> and <code>owl:inverseOf</code>.</p>
+<p>Subsequently, for each sense all lexical entries denoting this sense
+are retrieved from the lexicon, together with all relevant
+morphosyntactic information. On the basis of its syntactic frame or, if
+no frame is specified, its part of speech, templates for GF
+linearization judgements are instantiated. For example, the following
+two lexical entries…</p>
+<pre><code>  :mountain a lemon:LexicalEntry ;
+      lexinfo:partOfSpeech lexinfo:noun ;
+      lemon:canonicalForm [ lemon:writtenRep &quot;mountain&quot;@en ] ;
+      lemon:sense [ lemon:reference dbpedia:Mountain ] .
+
+  :peak a lemon:LexicalEntry ;
+      lexinfo:partOfSpeech lexinfo:noun ;
+      lemon:canonicalForm [ lemon:writtenRep &quot;peak&quot;@en ;
+                            lexinfo:number lexinfo:singular ] ;
+      lemon:otherForm     [ lemon:writtenRep &quot;peaks&quot;@en ;
+                            lexinfo:number lexinfo:plural ];
+      lemon:sense [ lemon:reference dbpedia:Mountain ] .</code></pre>
+<p>…are converted into the following linearization judgements:</p>
+<pre><code>lin Mountain = variants { mkCN mountain_N; mkCN peak_N };
+
+oper
+    mountain_N = mkN &quot;mountain&quot;;
+    peak_N = mkN &quot;peak&quot; &quot;peaks&quot;;</code></pre>
+<p>lemon2gf covers the most common
+<a href="http://www.lexinfo.net/ontology/2.0/lexinfo.owl">LexInfo</a>
+parts of speech and frames, and can be easily extended.</p>
+<h2 id="example">Example</h2>
+<ul>
+<li>Ontology (ATIS flight travel domain, developed in the
+<a href="https://sites.google.com/site/portdial2/">PortDial</a>
+project): <a href="lemon2gf/travelDomain.owl">travelDomain.owl</a>,
+<a href="lemon2gf/travelDomain_ABox.ttl">travelDomain_ABox.ttl</a></li>
+<li>Lexicon:
+<a href="lemon2gf/travelDomain_en.ttl">travelDomain_en.ttl</a>,
+<a href="lemon2gf/travelDomain_ABox_en.ttl">travelDomain_ABox_en.ttl</a></li>
+<li>Generated GF grammars:
+<a href="lemon2gf/TravelDomain.gf">TravelDomain.gf</a>,
+<a href="lemon2gf/TravelDomainEng.gf">TravelDomainEng.gf</a></li>
+</ul>
+        </div>
+        <footer>
+            <div style="float:left;padding-left:50px;padding-top:10px;">
+                <a href="/contact.html">Contact</a> | <a href="http://github.com/jmccrae/lemon-model.net">GitHub</a>
+            
+            </div>
+            <div style="padding-top:10px;padding-right:50px;">
+                <a href="https://creativecommons.org/licenses/by/2.0/"><img src="/img/cc-by.png" style="height:40px;"/></a><br/>
+		<p>lemon is a collaboration between <a href="http://www.cit-ec.de">CITEC</a>,<a href="http://www.deri.ie">DERI</a>,
+		  <a href="http://www.oeg-upm.net">UPM</a> and <a href="http://www.dfki.de">DFKI</a>.<br/>
+		 Work on lemon has been partly funded 
+		  the <a href="http://www.monnet-project.eu/">Monnet project</a>.<br/>
+		  Hosting provided by the <a href="http://www.sc.cit-ec.uni-bielefeld.de/en/home">Semantic Computing Group</a> of the University Bielefeld.</p>
+                <p>Please report any issues at <a href="https://github.com/jmccrae/lemon-model.net/issues">GitHub</a></p>.
+            </div>
+        </footer>
+
+        <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+        mathiasbynens.be/notes/async-analytics-snippet -->
+        <script>
+            var _gaq = [['_setAccount', 'UA-33743292-1'], ['_trackPageview']];
+            ( function(d, t) {
+                    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                    g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+                    s.parentNode.insertBefore(g, s)
+                }(document, 'script'));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,172 @@
+.navbar-inverse {
+  background-color: #1b1b1b;
+  background-image: -moz-linear-gradient(top, #ffdd55, #ffe169);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffdd55), to(#ffe169));
+  background-image: -webkit-linear-gradient(top, #ffdd55, #ffe169);
+  background-image: -o-linear-gradient(top, #ffdd55, #ffe169);
+  background-image: linear-gradient(to bottom, #ffdd55, #ffe169);
+  background-repeat: repeat-x;
+  border-color: #252525;
+  }
+
+.navbar .nav>li>a {
+    color:#bbb;
+}
+
+li.active {
+    line-height: 40px;
+    font-size: 18px;
+}
+
+li.inactive {
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.user-tools {
+    float:right;
+    line-height: 25px;
+    position: absolute;
+    left: 1000px;
+}
+
+input[type="text"] {
+    margin-bottom: 0px;
+}
+
+footer {
+    border-top: 1px solid #999;
+
+    text-align: right;
+}
+
+
+/* RDF pages */
+
+p.license { font-size:70%; }
+
+/*.rdf > tbody > tr > td {
+  min-width:200px;
+}*/
+
+/* The lemon validator */
+
+.lemon-validator-error {
+    background-color: tomato;
+    border: 1px dashed black;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.lemon-validator-warn {
+    background-color: orange;
+    border: 1px dashed black;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.lemon-validator-note {
+    background-color: yellowgreen;
+    border: 1px dashed black;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+/* Used for user log-in */
+
+.login_mini {
+    text-align: right;
+}
+
+.login_mini > a {
+    border:none;
+}
+
+.login_error {
+    color:tomato;
+}
+
+/* RDF tables */
+.rdf > tbody > tr > td {
+    vertical-align: top;
+    padding-right: 20px;
+}
+
+
+.rdf > tbody > tr:nth-child(even)    { background-color:#ddd; }
+
+/* Sub-navigation */
+.subnav {
+background: #000000; /* Old browsers */
+background: -moz-linear-gradient(top, #000000 0%, #45484d 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#45484d)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #000000 0%,#45484d 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #000000 0%,#45484d 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #000000 0%,#45484d 100%); /* IE10+ */
+background: linear-gradient(to bottom, #000000 0%,#45484d 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#45484d',GradientType=0 ); /* IE6-9 */
+border-bottom: 1px solid #222;
+}
+
+/* Hide all submenus */
+div.uby {
+    display:none;
+}
+
+div.learn {
+    display:none;
+}
+
+div.download {
+    display:none;
+}
+
+div.resources {
+    display:none;
+}
+
+div.source {
+    display:none;
+}
+
+textarea.code-textarea {
+    width: 100%;
+    height: 30em;
+    font-family: monospace;
+}
+
+textarea.comment-textarea {
+    width: 100%;
+    height: 5em;
+}
+
+ins {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.newentry > h3 > .hideshowarrow {
+    display:inline-block;
+    width:18px;
+    height:15px;
+    background-image:url('/img/glyphicons-halflings.png');
+    background-position:-287px 41px;
+}
+
+.newentry-hide > h3 > .hideshowarrow {
+    display:inline-block;
+    width:18px;
+    height:15px;
+    background-image:url('/img/glyphicons-halflings.png');
+    background-position:-312px 41px;
+}
+
+.newentry-hide > form {
+    display:none;
+}

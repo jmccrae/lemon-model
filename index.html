@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+	<meta http-equiv="content-language" content="en">
+        <title>Lemon - Lexicon Model for Ontologies</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Bootstrap -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="/css/main.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="local.css" media="screen">
+        <script type="text/javascript" src="/js/vendor/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+
+        <style>
+            body {
+                padding-top: 60px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">                
+                <div class="navbar-header">
+                    <a class="brand" href="/"><img src="/img/logo_small.png" height="50px"/></a>
+                </div>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="inactive home"><a href="/index.html">Home</a></li>
+                        <li class="inactive learn"><a href="/learn/learn.html">Learn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subnav">
+                <div class="container learn">
+                    <ul class="nav learn">                    
+                        <li><a href="/learn/5mins.html">Getting Started</a></li>
+                        <li><a href="/learn/cookbook.html">Cookbook</a></li>
+                    </ul>
+                </div>
+                <div class="container download">
+                    <ul class="nav download">
+                        <li><a href="/download/download.html">Model files</a></li>
+                        <li><a href="/download/api.html">API</a></li>
+                        <li><a href="/download/lemon2gf.html">lemon2gf</a></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+    <div class="container">
+<h1>lemon - The Lexicon Model for Ontologies</h1>
+<div class="alert alert-danger">
+    The primary URI from the <em>lemon</em> model is now <a href="http://lemon-model.net/lemon#"><tt>http://lemon-model.net/lemon#</tt></a>. <br/>
+    If you are using <a href="http://www.monnet-project.eu/lemon#"><tt>http://www.monnet-project.eu/lemon#</tt></a> please update your data to the new 
+namespace.
+</div>
+
+<div class="row">
+    <div class="span7">
+        <p>Lemon is a proposed model for modeling lexicon and machine-readable dictionaries and linked to the Semantic Web and the Linked Data cloud. It was designed to meet the 
+        following challenges</p>
+
+        <p>
+        <div>
+            RDF-native form to enable leverage of existing Semantic Web technologies (<a href="http://www.w3.org/TR/rdf-sparql-query/">SPARQL</a>,
+            <a href="http://www.w3.org/TR/owl2-overview/">OWL</a>, <a href="http://www.w3.org/2005/rules/wiki/RIF_Working_Group">RIF</a> etc.).
+        </div>
+        <div>
+            Linguistically sound structure based on <a href="http://www.lexicalmarkupframework.org/">LMF</a> to enable conversion to existing offline formats.
+        </div>
+        <div>
+            Separation of the lexicon and ontology layers, to ensure compatability with existing OWL models.
+        </div>
+        <div>
+            Linking to data categories, in order to allow for arbitrarily complex linguistic description. In particular the <a href="http://lexinfo.net/">LexInfo</a> vocabulary is aligned to lemon and <a href="http://www.isocat.org">ISOcat</a>.
+        </div>
+        <div>
+            A small model using the principle of least power - the less expressive the language, the more reusable the data.
+        </div>
+        </p>
+        <p>Lemon was developed by the <a href="http://www.monnet-project.eu/">Monnet project</a> as a collaboration between:</p>
+
+        <p>            <a href="http://www.cit-ec.uni-bielefeld.de/">CITEC</a> at <a href="http://www.uni-bielefeld.de/">Bielefeld University</a>, <a href="http://www.deri.ie/">DERI</a> at the <a href="http://www.nuigalway.ie/">National University of Ireland, Galway</a>, <a href="http://www.upm.es/">Universidad Polit&#xe9;cnica de Madrid</a> and the <a href="http://www.dfki.de/">Deutsche Forschungszentrum f&#xfc;r K&#xfc;nstliche Intelligenz</a></p>
+
+
+    </div>
+
+    <div class="span5">
+        <div style="float:right;">
+            <img src="img/lemon-core.png" width="450px"/>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span6">
+    </div>
+    <div class="span1">
+    </div>
+    <div class="span5">
+
+        <h3>Who uses lemon?</h3>
+        <ul>
+            <li><a href="http://dbnary.forge.imag.fr/">Dbnary</a></li>
+            <li><a href="http://wiktionary.dbpedia.org/">DBpedia Wiktionary</a></li>
+            <li><a href="http://gilmere.upf.edu/corpus_data/ParoleSimpleOntology/">Parole/Simple</a></li>
+            <li><a href="http://www.lemon-model.net/lexica/uby">ubyLemon</a></li>
+            <li><a href="http://eurosentiment.eu/">Eurosentiment</a></li>
+            <li><a href="http://ld.panlex.org/">PanLex</a></li>
+            <li><a href="https://ec.europa.eu/isa2/sites/default/files/pmki.wp2_.d2.3_v1.0.pdf">PMKI</a> at EU Publications Office</li>
+        </ul>
+
+        <h3>How can I use lemon?</h3>
+        <p>To see how to <a href="/learn/5mins.html">get started</a> with the model see <a href="/learn/5mins.html">our guide</a></p>
+        <p>For <a href="/learn/cookbook.html">full documentation</a> you may consult the <a href="/learn/cookbook.html">Lemon Cookbook</a></p>
+
+        <p>
+        <a href="/download/api.html">Lemon API</a> is a Java-based interface for using lemon that is compatible with all major platforms. In addition, there is a
+        Wiki-like site for manipulating and publishing lemon data, called <a href="/download/source.html">Lemon Source</a>. This includes a service for generating lexica from ontologies.</p>
+
+
+        <p>Lemon is still under development and we welcome contributions. If you wish to get involved please join the 
+        <a href="http://w3.org/community/ontolex">W3C OntoLex Community Group</a></p>
+
+    </div>
+</div>
+        </div>
+        <footer>
+            <div style="float:left;padding-left:50px;padding-top:10px;">
+                <a href="/contact.html">Contact</a> | <a href="http://github.com/jmccrae/lemon-model.net">GitHub</a>
+            
+            </div>
+            <div style="padding-top:10px;padding-right:50px;">
+                <a href="https://creativecommons.org/licenses/by/2.0/"><img src="/img/cc-by.png" style="height:40px;"/></a><br/>
+		<p>lemon is a collaboration between <a href="http://www.cit-ec.de">CITEC</a>,<a href="http://www.deri.ie">DERI</a>,
+		  <a href="http://www.oeg-upm.net">UPM</a> and <a href="http://www.dfki.de">DFKI</a>.<br/>
+		 Work on lemon has been partly funded 
+		  the <a href="http://www.monnet-project.eu/">Monnet project</a>.<br/>
+		  Hosting provided by the <a href="http://www.sc.cit-ec.uni-bielefeld.de/en/home">Semantic Computing Group</a> of the University Bielefeld.</p>
+                <p>Please report any issues at <a href="https://github.com/jmccrae/lemon-model.net/issues">GitHub</a></p>.
+            </div>
+        </footer>
+
+        <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+        mathiasbynens.be/notes/async-analytics-snippet -->
+        <script>
+            var _gaq = [['_setAccount', 'UA-33743292-1'], ['_trackPageview']];
+            ( function(d, t) {
+                    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                    g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+                    s.parentNode.insertBefore(g, s)
+                }(document, 'script'));
+        </script>
+    </body>
+</html>
